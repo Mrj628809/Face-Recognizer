@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import face_recognition
+import pickle
 
 DEFAULT_ENCODINGS_PATH = Path("output/encodings.pkl")
 
@@ -13,6 +14,7 @@ def encode_known_faces(
 ) -> None:
     names = []
     encodings = []
+
     for filepath in Path("training").glob("*/*"):
         name = filepath.parent.name
         image = face_recognition.load_image_file(filepath)
@@ -23,3 +25,9 @@ def encode_known_faces(
         for encoding in face_encodings:
             names.append(name)
             encodings.append(encoding)
+
+    name_encodings = {"names": names, "encodings": encodings}
+    with encodings_location.open(mode="wb") as f:
+        pickle.dump(name_encodings, f)
+
+encode_known_faces()
