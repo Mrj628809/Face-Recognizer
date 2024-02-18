@@ -7,6 +7,8 @@ __pycache__
 .env
 myvenv/
 venv/
+test-images/
+training-images/
 
 # macOS
 ._*
@@ -18,3 +20,7 @@ venv/
 .vscode/
 .history/
 *.code-workspace
+
+
+*.csv
+*.pkl
